@@ -33,4 +33,4 @@ jobs:
           mv output/index.html .
           git add index.html
           git commit -m "Update"
-          git push origin gh-pages
+          git push -u origin gh-pages
