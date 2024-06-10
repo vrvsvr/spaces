@@ -24,13 +24,7 @@ jobs:
       - name: Run Python Script
         run: python generate.py ${{ secrets.TOKEN }}
 
-      # Step to checkout the gh-pages branch and copy the output/index.html file
-      - name: Deploy to gh-pages
-        run: |
-          git config --global user.email "alexz005.info@gmail.com"
-          git config --global user.name "AlexZ005"
-          git checkout -b gh-pages || git checkout gh-pages
-          mv output/index.html .
-          git add index.html
-          git commit -m "Update"
-          git push -u origin gh-pages
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: output # The folder the action should deploy.
