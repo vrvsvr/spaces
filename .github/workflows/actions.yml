@@ -1,0 +1,35 @@
+name: Run Python Script with Token
+
+on:
+  workflow_dispatch:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      # Assuming token is stored as a secret named TOKEN
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      
+      - name: Run Python Script
+        run: python generate.py ${{ secrets.TOKEN }}
+
+      # Step to checkout the gh-pages branch and copy the output/index.html file
+      - name: Deploy to gh-pages
+        run: |
+          git config --global user.email "alexz005.info@gmail.com"
+          git config --global user.name "AlexZ005"
+          git checkout gh-pages
+          mv output/index.html .
+          git add index.html
+          git commit -m "Update"
+          git push origin gh-pages

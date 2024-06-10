@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Discussions</title>
+    <style>
+        img {
+            height: 150px;
+        }
+        .upvote-count {
+            display: inline-block;
+            padding: 5px;
+            background-color: #f0f0f0; /* Light grey background */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+            font-weight: bold;
+            font-size: 14px;
+            color: #333; /* Dark text */
+        }
+
+        .upvote-count svg {
+            fill: #007bff; /* Blue color for the upvote arrow */
+            margin-right: 5px; /* Space between the arrow and the count */
+            transform: rotate(180deg);
+        }
+        svg {
+            transition: transform 0.3s ease-out; /* Smooth transition */
+        }
+
+        svg:hover {
+            transform: translateY(-2px) rotate(180deg);; /* Moves the SVG up by 10 pixels */
+        }
+        .upvote-count p {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Discussions</h1>
+    <div class="discussion-list">
+        {% for discussion in discussions %}
+            <article class="discussion-item">
+                <h2><p class="upvote-count">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 9 12 15 6 9"></polyline>
+                </svg>{{ discussion.upvoteCount }}</p> : <a href="{{ discussion.html_url }}">{{ discussion.title }}</a></h2>
+                {{ discussion.bodyHTML | safe }}
+                <small>Created on {{ discussion.createdAt }}</small>
+            </article>
+        {% else %}
+            <p>No discussions found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
