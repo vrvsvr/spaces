@@ -11,6 +11,8 @@ on:
         description: 'Test scenario tags'
 
 jobs:
+  permissions:
+    contents: write
   run-script:
     runs-on: ubuntu-latest
     steps:
