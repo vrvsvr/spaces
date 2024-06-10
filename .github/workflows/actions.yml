@@ -29,7 +29,7 @@ jobs:
         run: |
           git config --global user.email "alexz005.info@gmail.com"
           git config --global user.name "AlexZ005"
-          git checkout gh-pages
+	  git checkout -b gh-pages || git checkout gh-pages
           mv output/index.html .
           git add index.html
           git commit -m "Update"
